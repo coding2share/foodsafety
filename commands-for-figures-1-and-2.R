@@ -31,11 +31,13 @@ cat <- as.factor(c('Intervention\ncharacteristics','Intervention\ncharacteristic
 num <- c(15,13,53,71,11,24,22,29,49,7,6,9,16,14,9)
 numitems<-data.frame(item,num,cat)
 # The palette with grey:
-cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ggplot(numitems, aes(reorder(item,num), num,fill=cat)) + 
-  geom_bar(stat="identity",colour="black") +
-  coord_flip() + scale_fill_brewer(palette="Dark2", name="Domain") +
-  ylab("Number of responses coded\nto construct") + xlab("Construct")
+  geom_bar(stat="identity",colour="gray") +
+  coord_flip() + 
+  scale_fill_grey(start = .2, end = 1, name = "Domain") +
+  ylab("Number of responses coded\nto construct") + 
+  xlab("Construct") +
+  theme_minimal()
 
 #table of frequencies by item category
 aggregate(numitems$num, by=list(Category=numitems$cat), FUN=sum)
@@ -68,7 +70,7 @@ scoresj <- data.frame(Item, fstrongneg,eweakneg,cmixedneut,bweakpos,astrongpos)
 
 scores3i<-likert(,scoresj)
 scores3i
-plot(scores3i,centered = FALSE, wrap=35, plot.percent.neutral=F) + scale_fill_brewer(palette="PRGn", 
+plot(scores3i,centered = FALSE, wrap=35, plot.percent.neutral=F) + scale_fill_grey(start = .9, end = .3, 
                                                     labels=c('Strong negative','Weak negative',
                                                              'Neutral & Mixed','Weak positive',
                                                              'Strong positive'), name="Code") +
